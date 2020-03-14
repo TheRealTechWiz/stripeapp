@@ -19,6 +19,7 @@ import com.google.gson.reflect.TypeToken;
 import com.stripe.android.ApiResultCallback;
 import com.stripe.android.PaymentIntentResult;
 import com.stripe.android.Stripe;
+import com.stripe.android.model.Address;
 import com.stripe.android.model.ConfirmPaymentIntentParams;
 import com.stripe.android.model.ConfirmSetupIntentParams;
 import com.stripe.android.model.PaymentIntent;
@@ -107,10 +108,16 @@ public class CheckoutActivityJava extends AppCompatActivity {
             EditText name = findViewById(R.id.nameInput);
             EditText phone = findViewById(R.id.phoneInput);
 
-            //billing details adress,email,name,phone
             PaymentMethod.BillingDetails billingDetails = (new PaymentMethod.BillingDetails.Builder())
                     .setEmail(emailInput.getText().toString())
-             //     .setAddress("ds")
+                    .setAddress(new Address.Builder()
+                            .setCity("Los Angeles")
+                            .setCountry("US")
+                            .setLine1("123 Main St")
+                            .setLine2("locality")
+                            .setPostalCode("null")
+                            .setState("CA")
+                            .build())
                     .setName(name.getText().toString())
                     .setPhone(phone.getText().toString())
                     .build();
